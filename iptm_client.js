@@ -21,7 +21,7 @@ if(win32 == true) {
 }
 else if (true == (darwin || linux)) {
 	console.log('OK! Supported Operating System');
-	var ipc_path = `data_IPTM/node1/geth.ipc`;
+	var ipc_path = `../data_IPTM/node1/geth.ipc`;
 	var geth_path = `../geth`;
 } else {
 	console.log('Halted! Not Supported Operating System');
@@ -52,7 +52,7 @@ const Length_bootnode = 300;
 
 const list_bootnodes_txt = 'list_bootnodes.txt';
 const file_NodeId = 'nodeId.txt';
-const inCmd_getEnodeId_DefaultEthAccount = 'inCmd_getEnodeId_DefaultEthAccount.txt';
+const inCmd_getEnodeId_DefaultEthAccount = 'InCmd_getEnodeId_DefaultEthAccount.txt';
 const outCmd_getEnodeId_DefaultEthAccount = 'outCmd_getEnodeId_DefaultEthAccount.txt';
 
 var looping_program_counter = 0; // looping main program
@@ -260,7 +260,7 @@ async function pushReadEnodeId_DefautEthAccountintoGeth() {
 			await execCmd(`${geth_path} attach ipc:\\\\.\\pipe\\${ipc_path} < ${inCmd_getEnodeId_DefaultEthAccount} > ${outCmd_getEnodeId_DefaultEthAccount}`);
 		}
 		else if (true == (darwin || linux)) {
-			await execCmd(`${geth_path} attach attach ipc:${ipc_path} < ${inCmd_getEnodeId_DefaultEthAccount} > ${outCmd_getEnodeId_DefaultEthAccount}`);
+			await execCmd(`${geth_path} attach ipc:${ipc_path} < ${inCmd_getEnodeId_DefaultEthAccount} > ${outCmd_getEnodeId_DefaultEthAccount}`);
 		}
 		
 		// console.log('Done, pushReadEnodeId_DefautEthAccountintoGeth');
