@@ -17,10 +17,12 @@ console.log(`This OS Platform is ${process.platform}`);
 if(win32 == true) {
 	console.log('OK! Supported Operating System');
 	var ipc_path = `data_IPTM\\node1\\geth.ipc`;
+	var geth_path = `..\\geth`;
 }
 else if (true == (darwin || linux)) {
 	console.log('OK! Supported Operating System');
 	var ipc_path = `data_IPTM/node1/geth.ipc`;
+	var geth_path = `../geth`;
 } else {
 	console.log('Halted! Not Supported Operating System');
 	process.exit(-1);
@@ -255,10 +257,10 @@ async function getEnodeId_MinerAddress (filename) {
 async function pushReadEnodeId_DefautEthAccountintoGeth() {
 	
 		if(win32 == true) {
-			await execCmd(`geth attach ipc:\\\\.\\pipe\\${ipc_path} < ${inCmd_getEnodeId_DefaultEthAccount} > ${outCmd_getEnodeId_DefaultEthAccount}`);
+			await execCmd(`${geth_path} attach ipc:\\\\.\\pipe\\${ipc_path} < ${inCmd_getEnodeId_DefaultEthAccount} > ${outCmd_getEnodeId_DefaultEthAccount}`);
 		}
 		else if (true == (darwin || linux)) {
-			await execCmd(`./geth attach ipc:${ipc_path} < ${inCmd_getEnodeId_DefaultEthAccount} > ${outCmd_getEnodeId_DefaultEthAccount}`);
+			await execCmd(`${geth_path} attach attach ipc:${ipc_path} < ${inCmd_getEnodeId_DefaultEthAccount} > ${outCmd_getEnodeId_DefaultEthAccount}`);
 		}
 		
 		// console.log('Done, pushReadEnodeId_DefautEthAccountintoGeth');
@@ -408,10 +410,10 @@ function pushBootnodesintoGeth(server_respone) {
 		console.log('Write: ' + list_bootnodes_txt);
 		
 		if(win32 == true) {
-			execCmd(`geth attach ipc:\\\\.\\pipe\\${ipc_path} < ${list_bootnodes_txt}`);
+			execCmd(`${geth_path} attach ipc:\\\\.\\pipe\\${ipc_path} < ${list_bootnodes_txt}`);
 		}
 		else if (true == (darwin || linux)) {
-			execCmd(`./geth attach ipc:${ipc_path} < ${list_bootnodes_txt}`);
+			execCmd(`${geth_path} attach ipc:${ipc_path} < ${list_bootnodes_txt}`);
 		}
 		
 	});
