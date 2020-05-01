@@ -330,7 +330,7 @@ function connectToServer () {
 	// Options to be used by for http request 
 	var options = {
 	//	host: 'localhost',
-		host: 'iptm-sealer.iexplotech.com',
+		host: 'iptm.online',
 		port: '8080',
 		path: '/list_bootnodes.json',
 	//	path: '/table.html',
