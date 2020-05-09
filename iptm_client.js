@@ -500,4 +500,4 @@ function loopBootnodeClient () {
 
 loopBootnodeClient();
 // Execute Main Program every ms interval
-setInterval(loopBootnodeClient, 30000);
+setInterval(loopBootnodeClient, 60000);
