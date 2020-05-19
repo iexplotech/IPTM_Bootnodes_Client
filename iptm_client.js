@@ -3,15 +3,15 @@
 // Website: https://github.com/iexplotech  www.iptm.online, www.mhei.online, www.iexplotech.com
 // License: GNU General Public License v3.0
 
-const Bootnodes_Client_Version = 'alpha:0.1:IPTM:iExploTech';
-console.log('IPTM BOOTNODES CLIENT, Version: ' + Bootnodes_Client_Version);
+const Bootnodes_Client_Version = 'alpha:0.1.1:IPTM:iExploTech';
+console.log('IPTM BOOTNODES CLIENT (Windows/Linux/Mac), Version: ' + Bootnodes_Client_Version);
 
 
 // check OS platform
 var win32 = process.platform === "win32"; // Same for x64 Win OS
 var darwin = process.platform === "darwin";  // Mac
 var linux = process.platform === "linux";
-console.log(`Supported OS Platform = Windows:${win32} Linux:${linux} Mac:${linux}`);
+console.log(`Current OS Platform = Windows:${win32} Linux:${linux} Mac:${darwin}`);
 console.log(`This OS Platform is ${process.platform}`);
 
 if(win32 == true) {
@@ -331,7 +331,7 @@ function connectToServer () {
 	var options = {
 	//	host: 'localhost',
 		host: 'bootnodes.iptm.online',
-		port: '8080',
+		port: '80',
 		path: '/list_bootnodes.json',
 	//	path: '/table.html',
 		method: 'POST',
