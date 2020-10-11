@@ -3,15 +3,17 @@
 // Website: https://github.com/iexplotech  www.iptm.online, www.mhei.online, www.iexplotech.com
 // License: GNU General Public License v3.0
 
-const Bootnodes_Client_Version = 'alpha:0.1.1:IPTM:iExploTech';
-console.log('IPTM BOOTNODES CLIENT (Windows/Linux/Mac), Version: ' + Bootnodes_Client_Version);
+const Bootnodes_Client_Version = 'alpha:0.2:IPTM:iExploTech';
+const server = 'iptmbootnodes.iexplotech.com';
+const port = '8080';
+console.log('IPTM BOOTNODES CLIENT, Version: ' + Bootnodes_Client_Version);
 
 
 // check OS platform
 var win32 = process.platform === "win32"; // Same for x64 Win OS
 var darwin = process.platform === "darwin";  // Mac
 var linux = process.platform === "linux";
-console.log(`Current OS Platform = Windows:${win32} Linux:${linux} Mac:${darwin}`);
+console.log(`Supported OS Platform = Windows:${win32} Linux:${linux} Mac:${linux}`);
 console.log(`This OS Platform is ${process.platform}`);
 
 if(win32 == true) {
@@ -330,9 +332,12 @@ function connectToServer () {
 	// Options to be used by for http request 
 	var options = {
 	//	host: 'localhost',
-		host: 'bootnodes.iptm.online',
-		port: '80',
+	//	host: 'iptmbootnodes.iexplotech.com',
+		host: server,
+	//	port: '8080',
+		port: port,
 		path: '/list_bootnodes.json',
+		timeout: 5000,
 	//	path: '/table.html',
 		method: 'POST',
 		headers: {
@@ -342,19 +347,36 @@ function connectToServer () {
 	};
 	
 	try {
+		var data = [];
+		
 		var req = http.request(options, res => {
 		console.log(`Server Response statusCode: ${res.statusCode}`);
+		
+		res.on('data', function(chunk) {
+			data.push(chunk);
+		}).on('end', function() {
+        //at this point data is an array of Buffers
+        //so Buffer.concat() can make us a new Buffer
+        //of all of them together
+        var buffer = Buffer.concat(data);
+        //console.log(buffer.toString('base64'));
+		console.log('Received Response from Server:\n\n' + buffer + '\n\n');
+		checkServerResponse(buffer);
+		});
 	
+	/*
 		res.on('data', server_respone => {
 				console.log('Received Response from Server:\n' + server_respone);		
 				checkServerResponse(server_respone);
 			})
 		})
+	*/
 	
 		req.on('error', error => {
 			eventEmitter.emit('FAILURE04', 'Error Connecting to Server');
 			console.error(error);
-		})
+		});
+	});
 	
 		// this the starting point to invoke http request
 		req.write(bootnode_json);
@@ -367,6 +389,8 @@ function connectToServer () {
 
 function checkServerResponse (server_respone) {
 	
+	console.log('server_respone.length: ' + server_respone.length);
+	console.log('IsJsonString: ' + IsJsonString(server_respone));
 	if(server_respone.length >= Length_bootnode && IsJsonString(server_respone) == true) {
 		//console.log('setBootnode: Done');
 		eventEmitter.emit('SUCCESS04', 'Check Server Bootnodes JSON format');
