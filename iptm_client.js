@@ -13,7 +13,7 @@ console.log('IPTM BOOTNODES CLIENT, Version: ' + Bootnodes_Client_Version);
 var win32 = process.platform === "win32"; // Same for x64 Win OS
 var darwin = process.platform === "darwin";  // Mac
 var linux = process.platform === "linux";
-console.log(`Supported OS Platform = Windows:${win32} Linux:${linux} Mac:${linux}`);
+console.log(`Supported OS Platform = Windows:${win32} Linux:${linux} Mac:${darwin}`);
 console.log(`This OS Platform is ${process.platform}`);
 
 if(win32 == true) {
