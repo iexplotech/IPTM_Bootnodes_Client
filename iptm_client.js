@@ -5,7 +5,7 @@
 
 const Bootnodes_Client_Version = 'alpha:0.2:IPTM:iExploTech';
 const server = 'iptmbootnodes.iexplotech.com';
-const port = '8080';
+const port = '80';
 console.log('IPTM BOOTNODES CLIENT, Version: ' + Bootnodes_Client_Version);
 
 
